@@ -25,7 +25,7 @@ void Player::keyPressEvent(QKeyEvent *event){
         t.translate(-this->pixmap().width()/2, -this->pixmap().height()/2);
 
         this->setTransform(t);
-        brojRotacija++;
+        brojRotacija--;
     }
     else if (event->key() == Qt::Key_Right){
         QTransform t = this->transform();
@@ -35,7 +35,7 @@ void Player::keyPressEvent(QKeyEvent *event){
         t.translate(-this->pixmap().width()/2, -this->pixmap().height()/2);
 
         this->setTransform(t);
-        brojRotacija--;
+        brojRotacija++;
     }
     // shoot with the spacebar
     else if (event->key() == Qt::Key_Up){

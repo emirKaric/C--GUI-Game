@@ -45,17 +45,23 @@ void Bullet::move(){
         }
     }
 
+    qreal pomX;
+    qreal pomY;
+
+
     // if there was no collision with an Enemy, move the bullet forward
     switch (brojRotacija % 8) {
-//        case 0: setPos(x(),y() - jedinicaPomijeranjaY); break;
-//        case 1: setPos(x() - 10, y() - jedinicaPomijeranjaY); break;
-//        case 2: setPos(x() - jedinicaPomijeranjaY, y()); break;
-//        case 3: setPos(x() + 10, y() - jedinicaPomijeranjaY); break;
-//        case 4: setPos(x(), y() + jedinicaPomijeranjaY); break;
-//        case 5: setPos(x() + 10, y()  + jedinicaPomijeranjaY); break;
-        case 6: setPos(x(), y() + jedinicaPomijeranjaY); break;
-        case 7: setPos(x() - 10, y()  + jedinicaPomijeranjaY); break;
+        case 0: pomX = this->x(); pomY = this->y() - jedinicaPomijeranjaY; break;
+        case -7: case 1: pomX = this->x() - -jedinicaPomijeranjaY, pomY = y() - jedinicaPomijeranjaY; break;
+        case -6: case 2: pomX = this->x() + jedinicaPomijeranjaY, pomY = this->y(); break;
+        case -5: case 3: pomX = this->x() + jedinicaPomijeranjaY, pomY = this->y() + jedinicaPomijeranjaY; break;
+        case -4: case 4: pomX = this->x(); pomY = this->y() + jedinicaPomijeranjaY; break;
+        case -3: case 5: pomX = this->x() - jedinicaPomijeranjaY, pomY = this->y()  + jedinicaPomijeranjaY; break;
+        case -2: case 6: pomX = this->x() - jedinicaPomijeranjaY, pomY = this->y(); break;
+        case -1: case 7: pomX = this->x() - jedinicaPomijeranjaY, pomY = this->y()  - jedinicaPomijeranjaY; break;
     }
+
+    setPos(pomX, pomY);
 
     // if the bullet is off the screen, destroy it
     if (pos().y() < 0){
