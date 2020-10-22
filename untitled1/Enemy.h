@@ -4,6 +4,8 @@
 #include <QGraphicsPixmapItem>
 #include <QObject>
 #include <QGraphicsItem>
+#include <QMediaPlayer>
+
 
 class Enemy: public QObject,public QGraphicsPixmapItem{
     Q_OBJECT
@@ -12,6 +14,8 @@ public:
     Enemy(QGraphicsItem * parent=0);
 public slots:
     void move();
+private:
+    QMediaPlayer * explosion;
 };
 
 #endif // ENEMY_H

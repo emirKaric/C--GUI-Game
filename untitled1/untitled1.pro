@@ -5,7 +5,8 @@
 #-------------------------------------------------
 
 QT       += core gui \
-            multimedia
+            multimedia \
+            sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -27,23 +28,28 @@ CONFIG += c++11
 
 SOURCES += \
     Bullet.cpp \
+    Button.cpp \
     Enemy.cpp \
     Game.cpp \
     Health.cpp \
     Player.cpp \
     Score.cpp \
+    dialog.cpp \
         main.cpp \
 
 
 HEADERS += \
     Bullet.h \
+    Button.h \
     Enemy.h \
     Game.h \
     Health.h \
     Player.h \
-    Score.h
+    Score.h \
+    dialog.h
 
-FORMS +=
+FORMS += \
+    dialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

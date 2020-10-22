@@ -9,7 +9,7 @@ extern Game * game;
 
 Enemy::Enemy(QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent){
     //set random x position
-    int random_number = rand() % 700;
+    int random_number = rand() % 600;
     setPos(random_number,0);
 
     // drew the rect
@@ -24,6 +24,10 @@ Enemy::Enemy(QGraphicsItem *parent): QObject(), QGraphicsPixmapItem(parent){
     // start the timer
     timer->start(50);
     jedinicaPomijeranja = 5;
+	
+    //Explosion sound
+    explosion= new QMediaPlayer();
+    explosion->setMedia(QUrl("qrc:/sound/Explosion.mp3"));
 }
 
 void Enemy::move(){
@@ -33,8 +37,20 @@ void Enemy::move(){
     // if one of the colliding items is an Enemy, destroy both the bullet and the enemy
     for (int i = 0, n = colliding_items.size(); i < n; ++i){
         if (typeid(*(colliding_items[i])) == typeid(Player)){
-            // increase the score
+            
+	    // decreasing health
             game->health->decrease();
+		
+	    if(game->health->getHealth() <= 0)
+                game->gameOver();
+		
+	    //play explosion sound
+            if (explosion->state() == QMediaPlayer::PlayingState){
+                explosion->setPosition(0);
+            }
+            else if (explosion->state() == QMediaPlayer::StoppedState){
+                explosion->play();
+            }
 
             // remove them from the scene (still on the heap)
             scene()->removeItem(this);
