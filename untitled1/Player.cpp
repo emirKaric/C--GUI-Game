@@ -37,7 +37,7 @@ void Player::keyPressEvent(QKeyEvent *event){
         this->setTransform(t);
         brojRotacija++;
     }
-    // shoot with the spacebar
+     // shoot with the keys up and down
     else if (event->key() == Qt::Key_Up){
         // create a bullet
         Bullet * bullet = new Bullet(10, brojRotacija);

@@ -20,6 +20,10 @@ Bullet::Bullet(int jedinicaPomijeranjaY, int brojRotacija, QGraphicsItem *parent
     timer->start(50);
     this->jedinicaPomijeranjaY = jedinicaPomijeranjaY;
     this->brojRotacija = brojRotacija;
+
+    //explosion sound
+    explosion= new QMediaPlayer();
+    explosion->setMedia(QUrl("qrc:/sound/Explosion.mp3"));
 }
 
 void Bullet::move(){
@@ -63,12 +67,25 @@ void Bullet::move(){
 
     setPos(pomX, pomY);
 
-    // if the bullet is off the screen, destroy it
+    // if the bullet is off the screen, destroy it and play explosion sound
     if (pos().y() < 0){
+        if (explosion->state() == QMediaPlayer::PlayingState){
+            explosion->setPosition(0);
+        }
+        else if (explosion->state() == QMediaPlayer::StoppedState){
+            explosion->play();
+        }
         scene()->removeItem(this);
         delete this;
-    }else if (pos().y() > 600){
+    }
+    else if (pos().y() > 600){
+        if (explosion->state() == QMediaPlayer::PlayingState){
+            explosion->setPosition(0);
+        }
+        else if (explosion->state() == QMediaPlayer::StoppedState){
+            explosion->play();
         scene()->removeItem(this);
         delete this;
+    	}
     }
 }

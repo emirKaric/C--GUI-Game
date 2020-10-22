@@ -1,10 +1,6 @@
 #include <QApplication>
 #include "Game.h"
 
-/*
-Tutorial Topics:
--QGraphicsPixmapItem, QPixmap, QImage
-*/
 
 Game * game;
 
@@ -13,6 +9,7 @@ int main(int argc, char *argv[]){
 
     game = new Game();
     game->show();
+    game->displayMainMenu();
 
     return a.exec();
 }
